@@ -1,46 +1,13 @@
 <template>
   <el-container class="layout-container">
-    <el-aside width="auto">
-      <el-scrollbar>
-        <el-menu 
-          class="el-menu-vertical-demo" 
-          mode="vertical" 
-          :collapse="isCollapse" 
-          background-color="#304156" 
-          text-color="rgb(191, 203, 217)"
-        >
-          <Sidebar></Sidebar>
-        </el-menu>
-      </el-scrollbar>
-    </el-aside>
-
-    <el-container :class="{'mainCustom':isCollapse}">
+    <!-- 侧边栏 -->
+    <Sidebar />
+    <el-container>
       <el-header>
-        <div>
-          <el-dropdown>
-            <el-icon style="margin-right: 8px; margin-top: 1px">
-              <setting />
-            </el-icon>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item>View</el-dropdown-item>
-                <el-dropdown-item>Add</el-dropdown-item>
-                <el-dropdown-item>Delete</el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-          <span>Tom</span>
-        </div>
+        <TagsView />
       </el-header>
-
       <el-main class="content">
-        <el-scrollbar>
-          <el-button @click="toggle">切换</el-button>
-          <el-button @click="toggle1">切换</el-button>
-          <div>
-            <router-view></router-view>
-          </div>
-        </el-scrollbar>
+        <router-view></router-view>
       </el-main>
     </el-container>
   </el-container>
@@ -48,13 +15,11 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { useStore } from '/@/store';
 import Sidebar from './components/Sidebar.vue';
-import {
-    Document,
-    Menu as IconMenu,
-    Location,
-    Setting,
-} from '@element-plus/icons-vue';
+import TagsView from './components/TagsView.vue';
+
+const store = useStore();
 const item = {
     date: '2016-05-02',
     name: 'Tom',
@@ -78,6 +43,9 @@ const toggle1 = () => {
 }
 </style>
 <style>
+.el-header{
+  padding-left: 0 !important;
+}
 .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
 }
