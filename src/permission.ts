@@ -1,10 +1,12 @@
-import getPageTitle from '/@/utils/get-page-title'
-import { getToken } from '/@/utils/auth';
-import { store } from '/@/store/index'
+import { router } from '/@/router'
 import Nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
 
-import { router } from '/@/router'
+import getPageTitle from '/@/utils/get-page-title'
+import { getToken } from '/@/utils/auth';
+
+import { usePermission } from '/@/store/permission';
+import { useUserStore } from '/@/store/user';
 
 Nprogress.configure({ showSpinner: false })
 
@@ -16,8 +18,11 @@ router.beforeEach(async (to, from, next) => {
     const hasToken = getToken()
     if (hasToken) {
         try {
-            const roles = await store.dispatch('user/getInfo')
-            const routes = await store.dispatch('permission/generateRoutes')
+            const roles = await useUserStore().getUserInfo()
+            const routes = await usePermission().generateRoutes(roles)
+            routes.forEach(route => {
+                router.addRoute(route)
+            })
             next()
         } catch (e) {
 

@@ -7,13 +7,14 @@
 </template>
 <script setup>
 import { ref } from 'vue';
-import { useStore } from '/@/store';
-
+import { useAppStore } from '/@/store/app';
+const appStore = useAppStore();
 const isActive = ref(false);
-const store = useStore();
 const toggleClick = () => {
     isActive.value = !isActive.value;
-    store.commit('updateCollapse');
+    appStore.$patch({
+        isCollapse: !appStore.isCollapse,
+    });
 };
 </script>
 <style scoped>
