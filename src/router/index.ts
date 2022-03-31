@@ -17,7 +17,7 @@ export const constantRoutes: RouteRecordRaw[] = [
             {
                 path: 'home',
                 name: 'Home',
-                meta: { title: '主页' },
+                meta: { title: '主页', icon: 'Location' },
                 component: () => import('/@/views/home/home.vue')
             }
         ]
@@ -28,12 +28,13 @@ export const constantRoutes: RouteRecordRaw[] = [
         meta: { title: '登录', hidden: true },
         component: () => import('/@/views/login/login.vue')
     },
-    {
-        path: '/:pathMatch(.*)*',
-        name: 'NotFound',
-        meta: { title: '404', hidden: true },
-        component: () => import('/@/views/error-page/NotFound.vue'),
-    }]
+    // {
+    //     path: '/:pathMatch(.*)*',
+    //     name: 'NotFound',
+    //     meta: { title: '404', hidden: true },
+    //     component: () => import('/@/views/error-page/NotFound.vue'),
+    // }
+]
 
 
 export const asyncRoutes: RouteRecordRaw[] = [
@@ -226,11 +227,6 @@ export const asyncRoutes: RouteRecordRaw[] = [
             }
         ]
     },
-    {
-        path: '/pdf/download',
-        component: () => import('/@/views/home/home.vue'),
-    },
-
     {
         path: '/theme',
         component: Layout,

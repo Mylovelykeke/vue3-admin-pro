@@ -5,7 +5,7 @@
     </svg>
   </el-icon>
 </template>
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import { useAppStore } from '/@/store/app';
 const appStore = useAppStore();
