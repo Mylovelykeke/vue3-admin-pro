@@ -1,30 +1,45 @@
 <template>
   <el-aside width="auto">
-    <el-scrollbar style="background:#304156">
+    <el-scrollbar style="background: #304156">
       <el-menu
         class="el-menu-vertical-demo"
         mode="vertical"
         router
+        :default-active="activeMenu"
         :collapse="isCollapse"
         background-color="#304156"
         text-color="rgb(191, 203, 217)"
       >
-        <SlidebarItem v-for="(item, key) in filterRoutes" :key="key" :item="item" />
+        <SlidebarItem
+          v-for="(item, key) in filterRoutes"
+          :key="key"
+          :item="item"
+        />
       </el-menu>
     </el-scrollbar>
   </el-aside>
 </template>
 
 <script setup lang="ts">
-import SlidebarItem from './SlidebarItem.vue';
-import { useAppStore } from '/@/store/app';
-import { usePermission } from '/@/store/permission';
-import { storeToRefs } from 'pinia';
+import SlidebarItem from './SlidebarItem.vue'
+import { useAppStore } from '/@/store/app'
+import { usePermission } from '/@/store/permission'
+import { storeToRefs } from 'pinia'
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
-const appStore = useAppStore();
-const permission = usePermission();
-const { isCollapse } = storeToRefs(appStore);
-const { filterRoutes } = storeToRefs(permission);
+const appStore = useAppStore()
+const permission = usePermission()
+const { isCollapse } = storeToRefs(appStore)
+const { filterRoutes } = storeToRefs(permission)
+console.log(filterRoutes)
+const activeMenu = computed(() => {
+  const { meta, path } = useRoute()
+  if (meta.activeMenu) {
+    return meta.activeMenu
+  }
+  return path
+})
 </script>
 
 <style>

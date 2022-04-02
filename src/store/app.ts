@@ -1,16 +1,11 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia'
 
-
-export const useAppStore = defineStore('app',{
-    state:()=>{
-        return {
-            isCollapse:false
-        }
-    },
-    getters:{
-
-    },
-    actions:{
-
+export const useAppStore = defineStore('app', {
+  state: () => {
+    return {
+      isCollapse: false,
     }
+  },
+  getters: {},
+  actions: {},
 })
